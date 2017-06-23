@@ -1,0 +1,22 @@
+
+登录检查
+
+但访问订单页时，先去检查有没有登录，通过session中是否有usernaem判断
+若没有，将不能访问 ，会调到登录页，登录成功后，跳到订单页
+http://localhost:8088/SpringMVCMybatisDemo/toOrder.do
+
+
+
+拦截器和过滤器：
+拦截器对action请求起作用，                              		 过滤器对几乎所有请求起作用
+拦截器可以获取spring容器中的bean对象			过滤器不行
+拦截器是Spring或struts框架的组价			过滤器是servlet规范规定的组件
+
+案例说明：
+当直接用	<a href="springMVCDemo04/toOrder.do"/>访问订单页面时
+
+先执行	LoginInceptor拦截器， 判断之前有没有登陆过系统(session中有没有存储用户信息 )
+		没登录返回false（表示不再执行ActionController）并跳转到登录页面
+		登录过返回true
+		(SpringMVC.xml中配置过哪些请求要拦截，哪些请求不拦截)	
+若登录过执行ActionController的toOrder.do去访问订单页面
